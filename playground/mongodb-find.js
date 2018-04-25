@@ -8,11 +8,19 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     console.log('Connected to MongoDB server');
     const db = client.db('TodoApp');
 
-    db.collection('Todos').find({
-        _id: new ObjectID('5acb6adb9752011e2cca940e')
-    }).toArray().then((docs) => {
-        console.log('Todos');
-        console.log(JSON.stringify(docs, undefined, 2));
+    // db.collection('todos').find()
+    //     .toArray().then((docs) => {
+    //         console.log('Todos');
+    //         console.log(JSON.stringify(docs, undefined, 2));
+    // }, (err) => {
+    //     console.log('Unable to fetch todos', err);
+    // });
+
+    db.collection('todos')
+        .find()
+        .count()
+        .then((count) => {
+            console.log('Todos count:', count);
     }, (err) => {
         console.log('Unable to fetch todos', err);
     });
